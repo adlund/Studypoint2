@@ -49,7 +49,9 @@ public class EchoServer {
             do {
                 Socket socket = serverSocket.accept(); //Important Blocking call
                 Logger.getLogger(EchoServer.class.getName()).log(Level.INFO, "Connected to a client");
-                handleClient(socket);
+                ClientHandler ch = new ClientHandler(socket);
+                ch.run();
+                
             } while (keepRunning);
         } catch (IOException ex) {
             Logger.getLogger(EchoServer.class.getName()).log(Level.SEVERE, null, ex);
